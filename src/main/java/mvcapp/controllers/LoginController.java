@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
     @RequestMapping(value = {"/", "/login", "/loginfailed", "/logout"}, method = RequestMethod.GET)
     public String login() {
-        return "redirect:/login";
+        return "login";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
