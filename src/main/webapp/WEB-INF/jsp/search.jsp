@@ -14,7 +14,6 @@
         <tr>
             <td>
                 <select name = "possible-result">
-                    <option value = "SUCCESS">Success</option>
                     <option value = "Title">Title</option>
                     <option value = "Text">Text</option>
                     <option value = "Comment">Comment</option>
