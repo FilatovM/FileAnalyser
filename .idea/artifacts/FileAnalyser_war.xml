@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="FileAnalyser:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="FileAnalyser.war">
-      <element id="artifact" artifact-name="FileAnalyser:war exploded" />
-    </root>
-  </artifact>
-</component>
