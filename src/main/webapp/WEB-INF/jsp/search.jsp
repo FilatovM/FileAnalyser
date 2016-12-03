@@ -9,6 +9,7 @@
 
 <form method="get" action="load-file">
     <h2>Requierment Search:</h2>
+    <a href="/home"> Home</a> <br>
     <table>
         <td>Parameter search</td>
         <tr>

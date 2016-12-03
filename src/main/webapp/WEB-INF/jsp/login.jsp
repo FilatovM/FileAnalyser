@@ -14,7 +14,7 @@
 
     <c:url var="loginUrl" value="/j_spring_security_check" />
     <form name='f' action="${loginUrl}" method="post">
-    <table>
+        <table>
             <tr>
                 <td>User:</td>
                 <td><input type='text' name='j_username' value=''></td>

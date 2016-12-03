@@ -10,6 +10,7 @@
 
 <form method="get" action="load-file">
     <h2>Load file:</h2>
+    <a href="/home"> Home</a> <br>
     <table>
         <tr>
             <td><b>File path:</b></td>
