@@ -21,7 +21,6 @@ public class DataBasePostgresImpl implements DataBaseDAO {
         for (Requirement req: reqs) {
             sessionFactory.getCurrentSession().save(req);
         }
-
     }
 
 }

@@ -11,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DBService {
-    @Autowired
     private DataBaseDAO dataBase_dao;
+
+    public DBService(DataBaseDAO dataBase_dao){
+        this.dataBase_dao = dataBase_dao;
+    }
 
     @Transactional
     public void loadReqs(List<Requirement> reqs) throws SQLException{

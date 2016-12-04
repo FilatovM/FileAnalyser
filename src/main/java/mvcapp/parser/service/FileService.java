@@ -14,8 +14,11 @@ import java.util.List;
 
 @Service
 public class FileService {
-    @Autowired
     private FileDAO fileDAO;
+
+    public FileService(FileDAO fileDAO) {
+        this.fileDAO = fileDAO;
+    }
 
     @Transactional
     public List<Requirement> parseReqs(String path) throws ParserConfigurationException, SAXException, ParseException, IOException {

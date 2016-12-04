@@ -1,5 +1,7 @@
 package mvcapp.parser.fileconnection;
 
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,8 +22,9 @@ import java.util.List;
 import mvcapp.entities.Requirement;
 import org.xml.sax.SAXException;
 
+@Component
 public class XmlImpl implements  FileDAO {
-    @Override
+    @Transactional
     public List<Requirement> parseReqs(String path) throws ParserConfigurationException, IOException, SAXException, ParseException {
         File xmlFile = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
