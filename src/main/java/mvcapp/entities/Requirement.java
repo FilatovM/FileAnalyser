@@ -8,7 +8,6 @@ import java.util.Date;
 public class Requirement {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "title")
@@ -23,7 +22,7 @@ public class Requirement {
     @Column(name = "done")
     private Boolean done;
 
-    @Column(name = "time estimated")
+    @Column(name = "time")
     private Integer time;
 
     @Column(name = "date")

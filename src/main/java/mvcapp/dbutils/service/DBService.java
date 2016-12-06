@@ -22,4 +22,9 @@ public class DBService {
         dataBase_dao.loadReqs(reqs);
     }
 
+    @Transactional
+    public List<Requirement> getReqs(String parametr, String contains) throws SQLException{
+        return dataBase_dao.getReqs(parametr, contains);
+    }
+
 }

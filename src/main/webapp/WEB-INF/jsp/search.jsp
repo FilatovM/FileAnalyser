@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=utf-8" %>
 <html>
 <head>
     <title>Search Page</title>
@@ -7,20 +8,20 @@
 
 <h1>NCEC File Analyser</h1>
 
-<form method="get" action="load-file">
+<form method="get" action="search-reqs">
     <h2>Requierment Search:</h2>
     <a href="/home"> Home</a> <br>
     <table>
         <td>Parameter search</td>
         <tr>
             <td>
-                <select name = "possible-result">
-                    <option value = "Title">Title</option>
-                    <option value = "Text">Text</option>
-                    <option value = "Comment">Comment</option>
-                    <option value = "Done">Done</option>
-                    <option value = "Time">Time</option>
-                    <option value = "Date">Date</option>
+                <select name = "parameter">
+                    <option value = "title">Title</option>
+                    <option value = "text">Text</option>
+                    <option value = "comment">Comment</option>
+                    <option value = "done">Done</option>
+                    <option value = "time">Time</option>
+                    <option value = "date">Date</option>
                 </select>
             </td>
         </tr>

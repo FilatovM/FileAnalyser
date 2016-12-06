@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DataBaseDAO {
     public void loadReqs(List<Requirement> reqs) throws SQLException;
+    public List<Requirement> getReqs(String parametr, String contains);
 }
