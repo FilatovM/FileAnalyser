@@ -31,6 +31,8 @@
         <property name="annotatedClasses">
             <list>
                 <value>mvcapp.entities.Requirement</value>
+                <value>mvcapp.entities.User</value>
+                <value>mvcapp.entities.Role</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -47,7 +49,6 @@
 
     <context:annotation-config />
 
-    <!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
     <context:component-scan base-package="mvcapp.dbutils" />
 
 </beans>

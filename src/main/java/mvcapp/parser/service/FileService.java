@@ -2,15 +2,16 @@ package mvcapp.parser.service;
 
 import mvcapp.entities.Requirement;
 import mvcapp.parser.fileconnection.FileDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FileService {
@@ -21,7 +22,7 @@ public class FileService {
     }
 
     @Transactional
-    public List<Requirement> parseReqs(String path) throws ParserConfigurationException, SAXException, ParseException, IOException {
-        return fileDAO.parseReqs(path);
+    public List<Requirement> parseReqs(File file, Map<String, String> map) throws ParserConfigurationException, SAXException, ParseException, IOException {
+        return fileDAO.parseReqs(file, map);
     }
 }

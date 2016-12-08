@@ -10,7 +10,7 @@
 
 <div id="load-completed-page">
 
-    <h2>Your file was loaded succesfully</h2>
+    <h2>${message}</h2>
     <a href="/home"> Home</a> <br>
 </div>
 </body>

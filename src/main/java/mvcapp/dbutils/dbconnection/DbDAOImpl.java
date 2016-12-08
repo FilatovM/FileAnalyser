@@ -2,6 +2,8 @@ package mvcapp.dbutils.dbconnection;
 
 import java.sql.SQLException;
 
+import mvcapp.entities.Role;
+import mvcapp.entities.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +15,7 @@ import mvcapp.entities.Requirement;
 import java.util.List;
 
 @Repository
-public class DataBasePostgresImpl implements DataBaseDAO {
+public class DbDAOImpl implements DbDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -40,4 +42,31 @@ public class DataBasePostgresImpl implements DataBaseDAO {
         return reqs;
     }
 
+    @Override
+    public List<Requirement> getAllReqs() {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from Requirement");
+        List<Requirement> reqs = query.list();
+        session.getTransaction().commit();
+        return reqs;
+    }
+
+    @Override
+    public void loadUser(String username, String password) throws SQLException{
+        User user = new User(username, password);
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.save(user);
+        session.getTransaction().commit();
+    }
+
+    @Override
+    public void addRole(String username, String user_role) throws SQLException{
+        Role role = new Role(username, user_role);
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.save(role);
+        session.getTransaction().commit();
+    }
 }

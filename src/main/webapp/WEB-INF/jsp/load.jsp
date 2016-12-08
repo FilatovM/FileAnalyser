@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,47 @@
     <table>
         <tr>
             <td><b>File path:</b></td>
-            <td><input type = "text" name = "path" /></td>
+            <td>
+                <label>
+                    <input type="text" name="path"/>
+                </label>
+            </td>
         </tr>
+        <td><b>File-DB mapping:</b></td><br>
+        <td><b>Enter field titles (keep empty to not map):</b></td>
+        <tr>
+            <th>File field</th>
+            <th>DB field</th>
+        </tr>
+        <tr>
+            <td><input type = "text" name = "id" /></td>
+            <td><b>ID</b></td>
+        </tr>
+        <tr>
+            <td><input type = "text" name = "title" /></td>
+            <td><b>Title</b></td>
+        </tr>
+        <tr>
+            <td><input type = "text" name = "text" /></td>
+            <td><b>Text</b></td>
+        </tr>
+        <tr>
+            <td><input type = "text" name = "comment" /></td>
+            <td><b>Comment</b></td>
+        </tr>
+        <tr>
+            <td><input type = "text" name = "done" /></td>
+            <td><b>Done</b></td>
+        </tr>
+        <tr>
+            <td><input type = "text" name = "time" /></td>
+            <td><b>Time</b></td>
+        </tr>
+        <tr>
+            <td><input type = "text" name = "date" /></td>
+            <td><b>Date</b></td>
+        </tr>
+
         <tr>
             <td colspan = "2"><input type = "submit" value = "Load file"/></td>
         </tr>

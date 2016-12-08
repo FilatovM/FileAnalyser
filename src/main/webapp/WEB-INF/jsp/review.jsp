@@ -2,13 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Search result page</title>
+    <title>Review page</title>
 </head>
 <body>
 <h1>NCEC File Analyser</h1>
 
-<div id="search-result-page">
-    <h2>Search result:</h2>
+<div id="review-page">
+    <h2>Requirements review:</h2>
     <a href="/home"> Home</a> <br>
     <table>
         <tr>

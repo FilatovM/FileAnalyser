@@ -16,7 +16,7 @@
     <form name='f' action="${loginUrl}" method="post">
         <table>
             <tr>
-                <td>User:</td>
+                <td>Username:</td>
                 <td><input type='text' name='j_username' value=''></td>
             </tr>
             <tr>

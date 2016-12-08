@@ -15,19 +15,25 @@
         <td>Parameter search</td>
         <tr>
             <td>
-                <select name = "parameter">
-                    <option value = "title">Title</option>
-                    <option value = "text">Text</option>
-                    <option value = "comment">Comment</option>
-                    <option value = "done">Done</option>
-                    <option value = "time">Time</option>
-                    <option value = "date">Date</option>
-                </select>
+                <label>
+                    <select name="parameter">
+                        <option value="title">Title</option>
+                        <option value="text">Text</option>
+                        <option value="comment">Comment</option>
+                        <option value="done">Done</option>
+                        <option value="time">Time</option>
+                        <option value="date">Date</option>
+                    </select>
+                </label>
             </td>
         </tr>
         <tr>
             <td><b>Contains</b></td>
-            <td><input type = "text" name = "contains"/></td>
+            <td>
+                <label>
+                    <input type="text" name="contains"/>
+                </label>
+            </td>
         </tr>
         <tr>
             <td colspan = "2"><input type = "submit" value = "Find Requierment"/></td>
