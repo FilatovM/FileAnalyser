@@ -11,5 +11,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface FileDAO {
-    List<Requirement> parseReqs(File file, Map<String, String> map) throws ParserConfigurationException, IOException, SAXException, ParseException;
+    List<Requirement> parseReqs(String path, Map<String, String> map) throws Exception;
 }

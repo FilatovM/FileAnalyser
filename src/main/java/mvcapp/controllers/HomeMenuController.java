@@ -2,7 +2,9 @@ package mvcapp.controllers;
 
 import mvcapp.dbutils.service.DbService;
 import mvcapp.entities.Requirement;
-import mvcapp.parser.fileconnection.XmlDAOImpl;
+import mvcapp.parser.fileconnection.JsonImpl;
+import mvcapp.parser.fileconnection.ExcelImpl;
+import mvcapp.parser.fileconnection.XmlImpl;
 import mvcapp.parser.service.FileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,38 +28,45 @@ public class HomeMenuController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search() {
-        return "search";
+        return "search/search";
     }
 
     @RequestMapping(value = "/add-user", method = RequestMethod.GET)
     public String addUser() {
-        return "add-user";
+        return "administrating/add-user";
     }
 
     @RequestMapping(value = "/appoint-user", method = RequestMethod.GET)
     public String appointUser() {
-        return "appoint-user";
+        return "administrating/appoint-user";
     }
 
     @RequestMapping(value = "/load", method = RequestMethod.GET)
     public String load() {
-        return "load";
+        return "loading/load";
     }
 
     @RequestMapping(value = "/load-file", method = RequestMethod.GET)
     public ModelAndView loadFile(String path, String id, String title, String text, String comment
             , String done, String time, String date) throws Exception {
-        ModelAndView err = new ModelAndView("/loading-error");
+        ModelAndView err = new ModelAndView("loading/loading-error");
         try {
             File file = new File(path);
-            String extension = path.substring(path.length() - 3, path.length());
+            String extension = path.substring(path.length() - 4, path.length());
             FileService fileService;
             switch(extension){
-                case "xml":
-                    fileService = new FileService(new XmlDAOImpl());
+                case ".xml":
+                    fileService = new FileService(new XmlImpl());
+                    break;
+                case "json":
+                    fileService = new FileService(new JsonImpl());
+                    break;
+                case ".xls":
+                case "xlsx":
+                    fileService = new FileService(new ExcelImpl());
                     break;
                 default:
-                    err.addObject("message", "Your file is not supported. Use .xml files to load");
+                    err.addObject("message", "Your file is not supported. Use .xml, .xls, .xlsx, .json files to load");
                     return err;
             }
             Map<String, String> map = new HashMap<>();
@@ -69,10 +78,10 @@ public class HomeMenuController {
             map.put("time", time);
             map.put("date", date);
 
-            List<Requirement> reqs = fileService.parseReqs(file, map);
+            List<Requirement> reqs = fileService.parseReqs(path, map);
             dbService.loadReqs(reqs);
 
-            ModelAndView mav = new ModelAndView("/loading-completed");
+            ModelAndView mav = new ModelAndView("loading/loading-completed");
             mav.addObject("message", "Your file has been successfully loaded.");
             return mav;
         } catch (FileNotFoundException e){
@@ -89,7 +98,7 @@ public class HomeMenuController {
     @RequestMapping(value = "/search-reqs", method = RequestMethod.GET)
     public ModelAndView searchReqs(String parameter, String contains) throws Exception {
         List<Requirement> reqs = dbService.getReqs(parameter, contains);
-        ModelAndView mav = new ModelAndView("search-result");
+        ModelAndView mav = new ModelAndView("search/search-result");
         mav.addObject("reqs", reqs);
         return mav;
     }
@@ -97,14 +106,14 @@ public class HomeMenuController {
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     public ModelAndView review() throws Exception {
         List<Requirement> reqs = dbService.getAllReqs();
-        ModelAndView mav = new ModelAndView("review");
+        ModelAndView mav = new ModelAndView("search/review");
         mav.addObject("reqs", reqs);
         return mav;
     }
 
     @RequestMapping(value = "/load-user", method = RequestMethod.GET)
     public ModelAndView loadUser(String username, String password, Integer role_idx) throws Exception {
-        ModelAndView err = new ModelAndView("/loading-error");
+        ModelAndView err = new ModelAndView("loading/loading-error");
         try {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(password);
@@ -116,7 +125,7 @@ public class HomeMenuController {
             for(int tmp = 0; tmp < role_idx; tmp++)
                 dbService.addRole(username, roles.get(tmp));
 
-            ModelAndView mav = new ModelAndView("/loading-completed");
+            ModelAndView mav = new ModelAndView("loading/loading-completed");
             mav.addObject("message", "New user have been successfully added.");
             return mav;
         } catch (Exception e){
@@ -128,13 +137,13 @@ public class HomeMenuController {
 
     @RequestMapping(value = "/add-role", method = RequestMethod.GET)
     public ModelAndView addRole(String username, String role) throws Exception {
-        ModelAndView err = new ModelAndView("/loading-error");
+        ModelAndView err = new ModelAndView("loading/loading-error");
         try {
             dbService.addRole(username, "ROLE_MODER");
             if(role.equals("ROLE_ADMIN"))
                 dbService.addRole(username, "ROLE_ADMIN");
 
-            ModelAndView mav = new ModelAndView("/loading-completed");
+            ModelAndView mav = new ModelAndView("loading/loading-completed");
             mav.addObject("message", "Access granted");
             return mav;
         } catch (Exception e){

@@ -22,8 +22,12 @@
                 </label>
             </td>
         </tr>
-        <td><b>File-DB mapping:</b></td><br>
-        <td><b>Enter field titles (keep empty to not map):</b></td>
+        <tr>
+            <td><b>File-DB mapping</b></td>
+        </tr>
+        <tr>
+            <td><b>Enter field titles (keep empty to not map)</b></td>
+        </tr>
         <tr>
             <th>File field</th>
             <th>DB field</th>

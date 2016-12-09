@@ -2,13 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Review page</title>
+    <title>Search result page</title>
 </head>
 <body>
 <h1>NCEC File Analyser</h1>
 
-<div id="review-page">
-    <h2>Requirements review:</h2>
+<div id="search-result-page">
+    <h2>Search result:</h2>
     <a href="/home"> Home</a> <br>
     <table>
         <tr>
@@ -17,7 +17,7 @@
             <th>Text</th>
             <th>Comment</th>
             <th>Done</th>
-            <th>Time</th>
+            <th>Time, h</th>
             <th>Date</th>
         </tr>
         <c:forEach var="req" items = "${reqs}">

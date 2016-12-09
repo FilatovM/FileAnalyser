@@ -7,6 +7,7 @@ import java.util.Date;
 @Table(name = "requirements")
 public class Requirement {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 

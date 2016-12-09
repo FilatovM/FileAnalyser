@@ -22,7 +22,7 @@ public class FileService {
     }
 
     @Transactional
-    public List<Requirement> parseReqs(File file, Map<String, String> map) throws ParserConfigurationException, SAXException, ParseException, IOException {
-        return fileDAO.parseReqs(file, map);
+    public List<Requirement> parseReqs(String path, Map<String, String> map) throws Exception {
+        return fileDAO.parseReqs(path, map);
     }
 }

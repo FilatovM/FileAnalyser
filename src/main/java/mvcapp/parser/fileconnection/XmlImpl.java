@@ -14,18 +14,16 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import mvcapp.entities.Requirement;
 import org.xml.sax.SAXException;
 
 @Repository
-public class XmlDAOImpl implements  FileDAO {
+public class XmlImpl implements  FileDAO {
     @Override
-    public List<Requirement> parseReqs(File xmlFile, Map<String, String> map) throws ParserConfigurationException, IOException, SAXException, ParseException {
+    public List<Requirement> parseReqs(String path, Map<String, String> map) throws ParserConfigurationException, IOException, SAXException, ParseException {
+        File xmlFile = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         Document document = documentBuilder.parse(xmlFile);
@@ -56,7 +54,13 @@ public class XmlDAOImpl implements  FileDAO {
 
                 if(map.get("done") != null && !map.get("done").isEmpty()) {
                     String done = element.getElementsByTagName(map.get("done")).item(0).getChildNodes().item(0).getNodeValue();
-                    req.setDone(done.equals("yes"));
+                    done = done.toLowerCase();
+                    HashSet<String> yes = new HashSet<>();
+                    yes.add("yes");
+                    yes.add("y");
+                    yes.add("true");
+                    yes.add("+");
+                    req.setDone(yes.contains(done));
                 }
 
                 if(map.get("time") != null && !map.get("time").isEmpty())
@@ -64,7 +68,7 @@ public class XmlDAOImpl implements  FileDAO {
 
                 if(map.get("date") != null && !map.get("date").isEmpty()) {
                     String dateStr = (element.getElementsByTagName(map.get("date")).item(0).getChildNodes().item(0).getNodeValue());
-                    SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+                    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                     Date date = format.parse(dateStr);
                     req.setDate(date);
                 }
