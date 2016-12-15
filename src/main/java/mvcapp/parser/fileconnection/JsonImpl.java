@@ -1,20 +1,16 @@
 package mvcapp.parser.fileconnection;
 
 import mvcapp.entities.Requirement;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class JsonImpl implements  FileDAO {
+    private static Logger log = LoggerFactory.getLogger(JsonImpl.class);
 
     @Override
     public List<Requirement> parseReqs(String path, Map<String, String> map) {
@@ -61,7 +57,7 @@ public class JsonImpl implements  FileDAO {
             reqs.add(req);
             return reqs;
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("Parsing error", e);
             return reqs;
         }
 

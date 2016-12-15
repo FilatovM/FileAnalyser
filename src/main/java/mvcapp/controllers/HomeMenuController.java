@@ -1,12 +1,15 @@
 package mvcapp.controllers;
 
-import mvcapp.dbutils.service.DbService;
+import mvcapp.dbutils.service.RequirementService;
+import mvcapp.dbutils.service.UserService;
 import mvcapp.entities.Requirement;
 import mvcapp.parser.fileconnection.JsonImpl;
 import mvcapp.parser.fileconnection.ExcelImpl;
 import mvcapp.parser.fileconnection.XmlImpl;
 import mvcapp.parser.service.FileService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,8 +26,12 @@ import java.util.Map;
 
 @Controller
 public class HomeMenuController {
+    private static Logger log = LoggerFactory.getLogger(HomeMenuController.class);
+
     @Autowired
-    private DbService dbService;
+    private RequirementService requirementService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search() {
@@ -79,17 +86,17 @@ public class HomeMenuController {
             map.put("date", date);
 
             List<Requirement> reqs = fileService.parseReqs(path, map);
-            dbService.loadReqs(reqs);
+            requirementService.loadReqs(reqs);
 
             ModelAndView mav = new ModelAndView("loading/loading-completed");
             mav.addObject("message", "Your file has been successfully loaded.");
             return mav;
         } catch (FileNotFoundException e){
-            e.printStackTrace();
+            log.error("File not found error", e);
             err.addObject("message", "Your file was not found. Check your path.");
             return err;
         } catch (Exception e){
-            e.printStackTrace();
+            log.error("Requirement loading error", e);
             err.addObject("message", e.getMessage());
             return err;
         }
@@ -97,7 +104,7 @@ public class HomeMenuController {
 
     @RequestMapping(value = "/search-reqs", method = RequestMethod.GET)
     public ModelAndView searchReqs(String parameter, String contains) throws Exception {
-        List<Requirement> reqs = dbService.getReqs(parameter, contains);
+        List<Requirement> reqs = requirementService.getReqs(parameter, contains);
         ModelAndView mav = new ModelAndView("search/search-result");
         mav.addObject("reqs", reqs);
         return mav;
@@ -105,7 +112,7 @@ public class HomeMenuController {
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     public ModelAndView review() throws Exception {
-        List<Requirement> reqs = dbService.getAllReqs();
+        List<Requirement> reqs = requirementService.getAllReqs();
         ModelAndView mav = new ModelAndView("search/review");
         mav.addObject("reqs", reqs);
         return mav;
@@ -117,19 +124,19 @@ public class HomeMenuController {
         try {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(password);
-            dbService.loadUser(username, hashedPassword);
+            userService.loadUser(username, hashedPassword);
             ArrayList<String> roles = new ArrayList<>();
             roles.add("ROLE_USER");
             roles.add("ROLE_MODER");
             roles.add("ROLE_ADMIN");
             for(int tmp = 0; tmp < role_idx; tmp++)
-                dbService.addRole(username, roles.get(tmp));
+                userService.addRole(username, roles.get(tmp));
 
             ModelAndView mav = new ModelAndView("loading/loading-completed");
             mav.addObject("message", "New user have been successfully added.");
             return mav;
         } catch (Exception e){
-            e.printStackTrace();
+            log.error("User loading error", e);
             err.addObject("message", e.getMessage());
             return err;
         }
@@ -139,15 +146,15 @@ public class HomeMenuController {
     public ModelAndView addRole(String username, String role) throws Exception {
         ModelAndView err = new ModelAndView("loading/loading-error");
         try {
-            dbService.addRole(username, "ROLE_MODER");
             if(role.equals("ROLE_ADMIN"))
-                dbService.addRole(username, "ROLE_ADMIN");
+                userService.addRole(username, "ROLE_ADMIN");
+            userService.addRole(username, "ROLE_MODER");
 
             ModelAndView mav = new ModelAndView("loading/loading-completed");
             mav.addObject("message", "Access granted");
             return mav;
         } catch (Exception e){
-            e.printStackTrace();
+            log.error("Role loading error", e);
             err.addObject("message", e.getMessage());
             return err;
         }
