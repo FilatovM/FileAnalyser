@@ -21,9 +21,6 @@ public class JsonImpl implements  FileDAO {
             JSONObject jsonObject = (JSONObject) obj;
             Requirement req = new Requirement();
 
-            if(map.get("id") != null && !map.get("id").isEmpty())
-                req.setId(((Long) jsonObject.get(map.get("id"))).intValue());
-
             if(map.get("title") != null && !map.get("title").isEmpty())
                 req.setTitle((String) jsonObject.get(map.get("title")));
 

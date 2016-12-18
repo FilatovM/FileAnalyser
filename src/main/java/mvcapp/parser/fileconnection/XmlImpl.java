@@ -44,9 +44,6 @@ public class XmlImpl implements  FileDAO {
                     Requirement req = new Requirement();
                     Element element = (Element) node;
 
-                    if (map.get("id") != null && !map.get("id").isEmpty())
-                        req.setId(Integer.valueOf(element.getElementsByTagName(map.get("id")).item(0).getChildNodes().item(0).getNodeValue()));
-
                     if (map.get("title") != null && !map.get("title").isEmpty())
                         req.setTitle(element.getElementsByTagName(map.get("title")).item(0).getChildNodes().item(0).getNodeValue());
 

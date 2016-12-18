@@ -33,10 +33,6 @@
             <th>DB field</th>
         </tr>
         <tr>
-            <td><input type = "text" name = "id" /></td>
-            <td><b>ID</b></td>
-        </tr>
-        <tr>
             <td><input type = "text" name = "title" /></td>
             <td><b>Title</b></td>
         </tr>

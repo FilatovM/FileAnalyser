@@ -54,7 +54,7 @@ public class HomeMenuController {
     }
 
     @RequestMapping(value = "/load-file", method = RequestMethod.GET)
-    public ModelAndView loadFile(String path, String id, String title, String text, String comment
+    public ModelAndView loadFile(String path, String title, String text, String comment
             , String done, String time, String date) throws Exception {
         ModelAndView err = new ModelAndView("loading/loading-error");
         try {
@@ -77,7 +77,6 @@ public class HomeMenuController {
                     return err;
             }
             Map<String, String> map = new HashMap<>();
-            map.put("id", id);
             map.put("title", title);
             map.put("text", text);
             map.put("comment", comment);

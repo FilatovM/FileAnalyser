@@ -57,9 +57,6 @@ public class ExcelImpl implements FileDAO{
                         idx++;
                     }
 
-                    if(map.get("id") != null && !map.get("id").isEmpty())
-                        req.setId(((Double) fieldVal.get(map.get("id"))).intValue());
-
                     if(map.get("title") != null && !map.get("title").isEmpty())
                         req.setTitle((String) fieldVal.get(map.get("title")));
 
