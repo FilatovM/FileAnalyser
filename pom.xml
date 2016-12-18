@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>NCEC</groupId>
     <artifactId>FileAnalyser</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>FileAnalyser Maven Webapp</name>
     <url>http://maven.apache.org</url>

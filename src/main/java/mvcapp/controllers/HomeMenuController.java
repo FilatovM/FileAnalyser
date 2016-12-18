@@ -146,9 +146,7 @@ public class HomeMenuController {
     public ModelAndView addRole(String username, String role) throws Exception {
         ModelAndView err = new ModelAndView("loading/loading-error");
         try {
-            if(role.equals("ROLE_ADMIN"))
-                userService.addRole(username, "ROLE_ADMIN");
-            userService.addRole(username, "ROLE_MODER");
+            userService.addRole(username, role);
 
             ModelAndView mav = new ModelAndView("loading/loading-completed");
             mav.addObject("message", "Access granted");

@@ -6,12 +6,12 @@ import javax.persistence.*;
 @Table(name = "user_roles")
 public class Role {
     @Id
-    @Column(name = "user_role_id")
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_role_id;
+    private Integer role_id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "user_id")
+    private Integer user_id;
 
     @Column(name = "role")
     private String role;
@@ -19,25 +19,25 @@ public class Role {
     public Role() {
     }
 
-    public Role(String username, String role){
-        this.username = username;
+    public Role(Integer user_id, String role){
+        this.user_id = user_id;
         this.role = role;
     }
 
-    public Integer getId_user_role() {
-        return user_role_id;
+    public Integer getRole_id() {
+        return role_id;
     }
 
-    public void setId_user_role(Integer user_role_id) {
-        this.user_role_id = user_role_id;
+    public void setRole_id(Integer role_id) {
+        this.role_id = role_id;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getRole() {
@@ -47,4 +47,6 @@ public class Role {
     public void setRole(String role) {
         this.role = role;
     }
+
+
 }
